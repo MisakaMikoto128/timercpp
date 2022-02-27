@@ -1,24 +1,21 @@
 #include <iostream>
-#include "timercpp.h"
+#include "LTimer.hpp"
 
 using namespace std;
 
-int main() {
-    Timer t;
+int main()
+{
 
-    t.setInterval([&]() {
-        cout << "Hey.. After each 1s..." << endl;
-    }, 1000); 
+    LTimer t;
 
-    t.setTimeout([&]() {
-        cout << "Hey.. After 5.2s. But I will stop the timer!" << endl;
-        t.stop();
-    }, 5200); 
+    t.setReapet([&]()
+                {
+        static int i = 0;
+        cout << "Hey.. After each "<< i++ <<"s..." << endl; },
+                1000, 10);
 
-    
+    cout << "I am LTimer" << endl;
 
-    cout << "I am Timer" <<endl;
-
-
-    while(true); // Keep mail thread active
+    while (true)
+        ; // Keep mail thread active
 }
